@@ -10,6 +10,10 @@ ADD build.sh ./newsletter
 
 RUN sh ./newsletter/build.sh
 
+ADD add_admin.py ./newsletter
+
+RUN python ./newsletter/add_admin.py
+
 ADD main.py ./newsletter
 
 CMD ["python3","./newsletter/main.py"]
