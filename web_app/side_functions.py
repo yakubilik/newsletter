@@ -2,6 +2,8 @@ from .models import News, create_database
 import requests
 import json
 from sqlalchemy import func
+from .models import create_database
+
 
 
 def fresh_news():
@@ -9,17 +11,19 @@ def fresh_news():
     articles = res.content.decode("utf-8")
     articles = json.loads(articles)
     articles = articles.get("articles")
-
     session = create_database()
-    id = session.query(func.max(News.id)).scalar()+1
+    news = News.session.query(News).all()
+    if len(news)>1:
+        id = News.session.query(func.max(News.id)).scalar()+1
+    else:
+        id = 1
     obj_list =[]
     for item in articles:
         id += 1
         title =item.get("title")
         content = item.get("content")
         image= item.get("urlToImage")
-        date = item.get("publishedAt")
-        obj = News(id ,title ,content ,image ,date)
+        obj = News(id ,title ,content ,image)
         obj_list.append(obj)
 
     session.add_all(obj_list)
