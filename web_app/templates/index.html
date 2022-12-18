@@ -64,7 +64,7 @@
 
 	</head>
 	<body>
-		
+
 	<div id="fh5co-offcanvass">
 		<a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close">Menu <i class="icon-cross"></i> </a>
 		<h1 class="fh5co-logo"><a class="navbar-brand" href="index.html">NewsLetter</a></h1>
@@ -72,6 +72,13 @@
 			<li><a href="{{ url_for('views.home') }}">Home</a></li>
 			<li><a href="{{ url_for('views.about') }}">About</a></li>
 		</ul>
+		<div>
+
+		<h3>Fresh News</h3>
+		<form method="post" action="/home">
+			<input type="submit" value="FRESH!" name="action1" />
+		</form>
+	</div>
 
 	</div>
 	<header id="fh5co-header" role="banner">
@@ -98,9 +105,9 @@
 
         	<div class="item">
         		<div class="animate-box">
-	        		<a href="/static/images/img_1.jpg" class="image-popup fh5co-board-img" title="haber"><img src={{data.image}} alt={{data.hello}}></a>
+	        		<a href={{data.image}} class="image-popup fh5co-board-img" title={{data.title}}><img src={{data.image}} alt={{data.title}}></a>
         		</div>
-        		<div class="fh5co-desc">{{data.icerik}}</div>
+        		<div class="fh5co-desc">{{data.title}}</div>
         	</div>
 			{% endfor %}
 
